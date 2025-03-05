@@ -14,9 +14,10 @@ def func(lad1, lad2, ai, af):
     at = abs(af - ai)
     ladx = 0; 
     
-    ladx = pot(lad1) + pot(lad2) - (2*((lad1)*(lad2)))*coseno(at)
+    ladx = rc(pot(lad1) + pot(lad2) - (2*((lad1)*(lad2)))*coseno(at))
     return ladx
     
 #organiza los datos como deben de entrar
 lista = [70, 0, 83, 90]    
 num = 0; 
+print(func(lista[0], lista[2], lista[1], lista[3]))
