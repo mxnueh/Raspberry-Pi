@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Profile</title>
+  <link rel="stylesheet" href="TransmissionDesign.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.7.2/socket.io.min.js"></script>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", function() {
+        var socket = io(); // Conectar con el servidor Flask-SocketIO
+        
+        // Escuchar actualizaciones del número
+        socket.on('update_number', function(data) {
+            document.getElementById("contador").innerText = data.number;
+        });
+    });
+  </script>
+</head>
+<style>
+    :root{
+  --base-clr: #11121a;
+  --line-clr: #42434a;
+  --hover-clr: #D1323936;
+  --text-clr: #e6e6ef;
+  --accent-clr: #03045e;
+  --secondary-text-clr: #b0b3c1;
+  --sidebar: #ffffff;
+}
+*{
+  margin: 0;
+  padding: 0;
+}
+html{
+  font-family: "Oswald", sans-serif;
+  line-height: 1.5rem;
+}
+body{
+  min-height: 100vh;
+  min-height: 100dvh;
+  background-color: var(--sidebar);
+  color: var(--text-clr);
+  display: grid;
+  grid-template-columns: auto 1fr;
+}
+#sidebar{
+  box-sizing: border-box;
+  height: 100vh;
+  width: 170px;
+  padding: 5px 1em;
+  background-color: var(--sidebar);
+  box-shadow: 5px 0px 10px rgba(0, 0, 0, 0.276);
+  position: sticky;
+  top: 0;
+  align-self: start;
+  transition: 300ms ease-in-out;
+  overflow: hidden;
+  text-wrap: nowrap;
+}
+
+#sidebar.close{
+  padding: 5px;
+  width: 59px;
+}
+#sidebar.close a, #sidebar.close .dropdown-btn {
+  white-space: nowrap;
+}
+
+#sidebar ul{
+  list-style: none;
+}
+#sidebar > ul > li:first-child{
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 16px;
+  .logo{
+    font-weight: 600;
+  }
+}
+#sidebar ul li.active a{
+  color: var(--base-clr);
+
+  svg{
+    fill: var(--accent-clr);
+  }
+}
+nav {
+  width: 150px;    
+  height: 100vh;   
+  display: flex;
+  align-items: center;  
+  justify-content: center; 
+  background-color: #f8f8f8;
+}
+
+h1 {
+  font-size: 100px; 
+  font-family: "Oswald", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 700;
+  font-style: normal;
+  font-weight: bold;  
+  writing-mode: vertical-rl; 
+  transform: rotate(180deg); 
+  text-align: center;  
+}
+
+.container{
+  border: 1px solid var(--line-clr);
+  border-radius: 1em;
+  margin: 20px;
+  padding: min(3em, 15%);
+
+  h2, p { margin-top: 1em }
+}
+
+.header {
+    background-color: var(--accent-clr);
+    color: white;
+    padding: 24px;
+    font-size: 20px;
+    font-weight: bold;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+
+.cont {
+  display: flex;
+  align-items: flex-start; /* Alinea los elementos en la parte superior */
+  gap: 10px; /* Espacio entre la imagen y las tablas */
+}
+
+.tables {
+  display: flex;
+  flex-direction: column; /* Apila las tablas verticalmente */
+}
+
+img {
+  margin: 20px;
+}
+
+.table-container {
+  background-color: white;
+  border-radius: 5px;
+  width: 330px;
+  text-align: center;
+}
+
+table {
+  width: 100%;
+  margin: 20px;
+  border-collapse: collapse; /* Evita bordes dobles */
+  border: 2px solid black; /* Borde uniforme */
+  background-color: white;
+  color: #444;
+  font-family: Arial, sans-serif;
+}
+
+th, td {
+  padding: 10px;
+  border: 2px solid black; /* Asegura que las celdas tengan el mismo borde */
+  text-align: center;
+}
+
+th {
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+td {
+  font-size: 1.3rem;
+}
+
+
+
+.logs-container {
+  width: 94%;
+  background-color: var(--accent-clr);
+  color: #ddd; 
+  font-family: monospace;
+  padding: 4px;
+  border-radius: 5px;
+  overflow-y: auto; 
+  border: 2px solid #444;
+}
+
+.logs-container {
+    margin-left: 20px;
+}
+
+h2 {
+  margin-bottom: 7px;
+}
+
+.log-border {
+  border: 1px solid #ddd;
+  border-radius: 2px;
+  padding-bottom: 10rem;
+  background-color: white;
+}
+</style>
+<body>
+  
+  <nav id="sidebar">
+    <h1>ASTROBOSCO</h1>
+
+    <!--<button onclick=toggleSidebar() id="toggle-btn">
+      <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#e8eaed"><path d="m313-480 155 156q11 11 11.5 27.5T468-268q-11 11-28 11t-28-11L228-452q-6-6-8.5-13t-2.5-15q0-8 2.5-15t8.5-13l184-184q11-11 27.5-11.5T468-692q11 11 11 28t-11 28L313-480Zm264 0 155 156q11 11 11.5 27.5T732-268q-11 11-28 11t-28-11L492-452q-6-6-8.5-13t-2.5-15q0-8 2.5-15t8.5-13l184-184q11-11 27.5-11.5T732-692q11 11 11 28t-11 28L577-480Z"/></svg>
+    </button>-->
+
+  </nav>
+  <main>
+    
+
+  <div class="header">
+      Raspberry Pi Camera Transmission -  Protocol System
+  </div>
+<!--   -->
+  
+<div class="cont">
+    <img src="stream.mjpg" width="840" height="400">
+    <div class="tables"> <!-- Nuevo contenedor para las tablas -->
+        <div class="table-container">
+            <table>
+                <tr>
+                    <th colspan="2">Terrain Mapping</th>
+                </tr>
+                <tr>
+                    <td><b>Distance</b></td>
+                    <td>[<span id="contador">0</span> , 0]</td>
+                </tr> 
+                <tr>
+                    <td><b>Angulo</b></td>
+                    <td>[0 , 0]</td>
+                </tr>
+                <tr>
+                    <th colspan="2">Resultado: 0</th>
+                </tr>
+            </table>
+        </div>
+
+        <div class="table-container">
+            <table>
+                <tr>
+                    <th colspan="2">Lunar Vacuum</th>
+                </tr>
+                <tr>
+                    <td><b>Power</b></td>
+                    <td> On</td>
+                </tr>
+                <tr>
+                    <td><b>Duty Cycle</b></td>
+                    <td>0°</td>
+                </tr>
+            </table>
+        </div>
+    </div>
+</div>
+
+<div class="logs-container">
+    <h2>Logs</h2>
+    <div id="logs"></div>
+    <div class="log-border"></div>
+</div>
+</main>
+</body>
+</html>
