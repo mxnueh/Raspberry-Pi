@@ -13,6 +13,7 @@ Aspiradora = 24
 # servo
 servo1 = 11
 servo2 = 12
+servo3 = 17
 
 # Configuracion GPIO
 GPIO.setmode(GPIO.BCM)
@@ -41,9 +42,9 @@ angleS1 = 60
 angleS2 = 90
 
 #config servo range finder
-GPIO.setmode(GPIO.BOARD)
-GPIO.setup(11, GPIO.OUT)
-servo = GPIO.PWM(11, 50)
+GPIO.setmode(GPIO.BCM)
+GPIO.setup(servo3, GPIO.OUT)
+servo = GPIO.PWM(servo3, 50)
 servo.start(7)  # Posición inicial en 90 grados
 
 angle = 90  # Ángulo inicial
