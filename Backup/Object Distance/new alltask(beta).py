@@ -6,6 +6,7 @@ import smbus
 from Rangefinder import getLidarData
 import TrianguloMain 
 
+n = [0,0,0,15]
 
 # Aspiradora
 Aspiradora = 24
