@@ -16,9 +16,9 @@ laser = 5
 Aspiradora = 24
 
 # servo
-servo1 = 11
-servo2 = 12
-servo3 = 17
+servo1 = 11 #servo brazo
+servo2 = 12 #servo contenedor
+servo3 = 17 #servo rangefinder
 
 # Configuracion GPIO
 GPIO.setmode(GPIO.BCM)
