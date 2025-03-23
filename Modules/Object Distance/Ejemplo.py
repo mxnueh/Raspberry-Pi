@@ -8,19 +8,17 @@ import TrianguloMain
 
 n = [0,0,0,0] 
 
+#Pin Laser
+laser = 5 
 
 saltos= [0.1,0.2,0.3,0.7,0.5,1,2,3,5,7,10,25]
-
-#Pin Laser
-laser = 5
-
 
 # Aspiradora
 Aspiradora = 24
 
 # servo
 servo1 = 11
-servo2 = 12
+servo2 = 13
 servo3 = 17
 
 # Configuracion GPIO
@@ -53,13 +51,11 @@ global angle
 angleS1 = 60
 angleS2 = 90
 
-
-
 #config servo range finder
 GPIO.setmode(GPIO.BCM)
 GPIO.setup(servo3, GPIO.OUT)
 servo = GPIO.PWM(servo3, 50)
-servo.start(7)  # Posición inicial en 90 grados
+servo.start(7)  # PosiciÃ³n inicial en 90 grados
 
 stpact = 11
 angle = 90  # Ángulo inicial
@@ -149,11 +145,7 @@ class MyController(Controller):
         servo.ChangeDutyCycle(calcular_duty_cycle(angle))
         print(f"El servo se movio {angle}")
         
-    def on_x_press(self):
-        global angle
-        angle -= 25
-        servo.ChangeDutyCycle(calcular_duty_cycle(angle))
-        print(f"El servo se ha movido {angle}")
+    
     
     #Aspirardora
     def on_playstation_button_press(self):
@@ -180,25 +172,16 @@ class MyController(Controller):
         contenedor2()
     
     #Funcionalidades para el servo
-    def on_L1_press(self):
-        changestpmas
-
-    def on_R1_press(self):
-        changestpmenos
-
-    
     def on_L3_press(self): #imprime la lista
         global angle
         print("Imprimer lista: ",n)
-        angle = max(0, angle - step)
-        servo.ChangeDutyCycle(calcular_duty_cycle(angle))
+     
         
     def on_circle_press(self): #borra la lista completa
         global angle
         n[0],n[1],n[2],n[3]=0,0,0,0
         print("Lista en cero: ",n)
-        angle = max(0, angle - step)
-        servo.ChangeDutyCycle(calcular_duty_cycle(angle))
+        
     
     #Funcionalidades Rangefinder
     def on_triangle_press(self):
@@ -206,15 +189,15 @@ class MyController(Controller):
         getLidarDataCmd = [0x5A,0x05,0x00,0x01,0x60] # Gets the distance value instruction	
         
         n[0] = getLidarData(address, getLidarDataCmd)
-        n[2] = getLidarData(address, getLidarDataCmd) #aqui va el angulo inicial delk se
+        n[1] = angle #aqui va el angulo inicial del servo
         print("Tomando distancia: ", n)
 		
     def on_square_press(self):
         address = 0x10 # Radar default address 0x10
         getLidarDataCmd = [0x5A,0x05,0x00,0x01,0x60] # Gets the distance value instruction	
      
-        n[1] = getLidarData(address, getLidarDataCmd)
-        n[3] = getLidarData(address, getLidarDataCmd) #aqui v a el angulo del servo
+        n[2] = getLidarData(address, getLidarDataCmd)
+        n[3] = angle #aqui v a el angulo del servo
         print("Tomando distancia: ", n)
      #Resultado del calculo del servo
     def on_R1_press(self):
@@ -227,6 +210,14 @@ class MyController(Controller):
         
     def on_R3_release(self):
         no_disparo()
+
+        #Funcionalidades para el servo
+    def on_L1_press(self):
+        changestpmas
+
+    def on_R1_release(self):
+        changestpmenos
+
 
     
 
