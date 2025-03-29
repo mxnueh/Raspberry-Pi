@@ -32,15 +32,17 @@ pwm_B.start(50)
 # Velocidad inicial
 speed = 50
 
+
 def set_speed(value):
     global speed
     speed = max(0, min(100, value))
     pwm_A.ChangeDutyCycle(speed)
     pwm_B.ChangeDutyCycle(speed)
     print(f"Velocidad ajustada a {speed}%")
-    
-    
+
+
 def forward():
+    stop()
     GPIO.output(IN1, GPIO.HIGH)
     GPIO.output(IN2, GPIO.LOW)
     GPIO.output(IN3, GPIO.HIGH)
@@ -49,6 +51,7 @@ def forward():
 
 
 def backward():
+    stop()
     GPIO.output(IN1, GPIO.LOW)
     GPIO.output(IN2, GPIO.HIGH)
     GPIO.output(IN3, GPIO.LOW)
@@ -57,6 +60,7 @@ def backward():
 
 
 def left():
+    stop()
     GPIO.output(IN1, GPIO.LOW)
     GPIO.output(IN2, GPIO.HIGH)
     GPIO.output(IN3, GPIO.HIGH)
@@ -65,6 +69,7 @@ def left():
 
 
 def right():
+    stop()
     GPIO.output(IN1, GPIO.HIGH)
     GPIO.output(IN2, GPIO.LOW)
     GPIO.output(IN3, GPIO.LOW)
@@ -78,9 +83,11 @@ def stop():
     GPIO.output(IN3, GPIO.LOW)
     GPIO.output(IN4, GPIO.LOW)
     print("Motores detenidos")
-    
+    time.sleep(0.25)
+
+
 class MyController(Controller):
-    def __init__(self, **kwargs):\
+    def __init__(self, **kwargs): \
         super().__init__(**kwargs)
 
     def on_x_press(self):
@@ -106,8 +113,7 @@ class MyController(Controller):
 
     def on_square_release(self):
         stop()
-        
-    
+
     def on_R1_press(self):
         if (speed < 80):
             set_speed(speed + 10)
