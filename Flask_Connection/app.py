@@ -32,12 +32,6 @@ def contador():
         time.sleep(0.01)  # Update every 10ms
 
 def lidar_tf_luna():
-<<<<<<< HEAD
-    while True:
-        global LidarSensor
-        LidarSensor = True
-        socketio.emit('update_lidar', {'LidarSensor': getLidarData})
-=======
     global LidarSensor #Hilo
     global lidar
     while True:
@@ -51,7 +45,6 @@ def lidar_tf_luna():
         lidar = getLidarData(address, getLidarDataCmd)
         socketio.emit('update_lidar', {'LidarSensor': getLidarData})
         
->>>>>>> d6d3140c9f0edb86ed54709a9d108fdd90b01067
         time.sleep(0.01)  # Update every 10ms
 
 
