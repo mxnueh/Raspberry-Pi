@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
+<head> 
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Profile</title>
@@ -14,6 +14,10 @@
         // Escuchar actualizaciones del número
         socket.on('update_number', function(data) {
             document.getElementById("contador").innerText = data.number;
+        });
+
+        socket.on('update_lidar', function(lidar){
+          document.getElementById("Lidar1").innertText = lidar.LidarSensor
         });
     });
   </script>
@@ -227,7 +231,7 @@ h2 {
                 </tr>
                 <tr>
                     <td><b>Distance</b></td>
-                    <td>[<span id="contador">0</span> , 0]</td>
+                    <td>[<span id="contador">0</span> ,<span id="Lidar1">0</span>]</td>
                 </tr> 
                 <tr>
                     <td><b>Angulo</b></td>

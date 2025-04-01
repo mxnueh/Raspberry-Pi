@@ -21,7 +21,7 @@ def func(lad1, lad2, ai, af):
 #organiza los datos como deben de entrar
 lista = [15, 0, 15, 90]    
 num = 0; 
-
+ 
 #ejecucion cleison 
 num = func(lista[0], lista[2], lista[1], lista[3])
 
