@@ -13,7 +13,7 @@ laser = 5
 
 
 # Aspiradora
-Aspiradora = 24
+Aspiradora = 19
 
 # servo
 servo1 = 11
