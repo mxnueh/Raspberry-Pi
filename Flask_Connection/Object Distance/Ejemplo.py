@@ -11,9 +11,10 @@ n = [0,0,0,0]
 #Pin Laser
 laser = 5 
 
+saltos= [0.1,0.2,0.3,0.7,0.5,1,2,3,5,7,10,25]
 
 # Aspiradora
-Aspiradora = 21
+Aspiradora = 24
 
 # servo
 servo1 = 11
@@ -56,8 +57,22 @@ GPIO.setup(servo3, GPIO.OUT)
 servo = GPIO.PWM(servo3, 50)
 servo.start(7)  # PosiciÃ³n inicial en 90 grados
 
-angle = 90  # Ãngulo inicial
-step = 25  # Incremento mÃ­nimo
+stpact = 11
+angle = 90  # Ángulo inicial
+step = saltos[stpact] # Incremento mínimo
+
+
+#cambio de step
+def changestpmas():
+    if(stpact <11):
+        stpact += 1
+    step = [stpact]
+    print(step)
+def changestpmenos():
+    if(stpact > 0):
+        stpact -= 1
+    step[stpact]
+    print(step)
 
 hold_time = 0.2  # Tiempo de espera para incremento progresivo
 
@@ -157,11 +172,10 @@ class MyController(Controller):
         contenedor2()
     
     #Funcionalidades para el servo
-    def on_L1_press(self): #imprime la lista
+    def on_L3_press(self): #imprime la lista
         global angle
         print("Imprimer lista: ",n)
-        angle = max(0, angle - step)
-        servo.ChangeDutyCycle(calcular_duty_cycle(angle))
+     
         
     def on_circle_press(self): #borra la lista completa
         global angle
@@ -196,6 +210,14 @@ class MyController(Controller):
         
     def on_R3_release(self):
         no_disparo()
+
+        #Funcionalidades para el servo
+    def on_L1_press(self):
+        changestpmas
+
+    def on_R1_release(self):
+        changestpmenos
+
 
     
 
