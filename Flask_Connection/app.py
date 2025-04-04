@@ -11,6 +11,7 @@ TiempoTranscurrido = 0
 contador_ejecutandose = False
 SenalesControl = False
 LidarSensor = False
+lidar = None 
 
 @app.route('/')
 def index():
@@ -32,26 +33,10 @@ def contador():
         time.sleep(0.01)  # Update every 10ms
 
 def lidar_tf_luna():
-<<<<<<< HEAD
     while True:
         global LidarSensor
         LidarSensor = True
         socketio.emit('update_lidar', {'LidarSensor': getLidarData})
-=======
-    global LidarSensor #Hilo
-    global lidar
-    while True:
-        
-        global LidarSensor
-        
-        
-        address = 0x10 # Radar default address 0x10
-        getLidarDataCmd = [0x5A,0x05,0x00,0x01,0x60] # Gets the distance value instruction
-        
-        lidar = getLidarData(address, getLidarDataCmd)
-        socketio.emit('update_lidar', {'LidarSensor': getLidarData})
-        
->>>>>>> d6d3140c9f0edb86ed54709a9d108fdd90b01067
         time.sleep(0.01)  # Update every 10ms
 
 
