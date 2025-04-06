@@ -104,29 +104,29 @@ def backward():
 
 def left():
     stop()
-    GPIO.output(IN1, GPIO.LOW)
-    GPIO.output(IN2, GPIO.HIGH)
+    GPIO.output(IN1, GPIO.HIGH)
+    GPIO.output(IN2, GPIO.LOW)
     GPIO.output(IN3, GPIO.HIGH)
     GPIO.output(IN4, GPIO.LOW)
     #driver2
     GPIO.output(IN12, GPIO.HIGH)
     GPIO.output(IN22, GPIO.LOW)
-    GPIO.output(IN32, GPIO.LOW)
-    GPIO.output(IN42, GPIO.HIGH)
+    GPIO.output(IN32, GPIO.HIGH
+    GPIO.output(IN42, GPIO.LOW)
     print("Girando a la izquierda")
 
 
 def right():
     stop()
-    GPIO.output(IN1, GPIO.HIGH)
-    GPIO.output(IN2, GPIO.LOW)
+    GPIO.output(IN1, GPIO.LOW)
+    GPIO.output(IN2, GPIO.HIGH)
     GPIO.output(IN3, GPIO.LOW)
     GPIO.output(IN4, GPIO.HIGH)
     #driver2
     GPIO.output(IN12, GPIO.LOW)
     GPIO.output(IN22, GPIO.HIGH)
-    GPIO.output(IN32, GPIO.HIGH)
-    GPIO.output(IN42, GPIO.LOW)
+    GPIO.output(IN32, GPIO.LOW)
+    GPIO.output(IN42, GPIO.HIGH)
     print("Girando a la derecha")
 
 
@@ -137,13 +137,13 @@ class MyController(Controller):
         super()._init_(**kwargs)
 
     def on_x_press(self):
-        forward()
+        backward()
 
     def on_x_release(self):
         stop()
 
     def on_triangle_press(self):
-        backward()
+        forward()
 
     def on_triangle_release(self):
         stop()
