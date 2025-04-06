@@ -17,9 +17,9 @@ saltos= [0.1,0.2,0.3,0.7,0.5,1,2,3,5,7,10,25]
 Aspiradora = 24
 
 # servo
-servo1 = 11
-servo2 = 13
-servo3 = 17
+servo1 = 11 #Servo Brazo
+servo2 = 13 #Servo Aspiradora
+servo3 = 17 #Servo Rangefinder
 
 # Configuracion GPIO
 GPIO.setmode(GPIO.BCM)
@@ -49,7 +49,7 @@ servoDriver2.start(7)
 # Servo
 global angle
 angleS1 = 60
-angleS2 = 90
+angleS2 = 180
 
 #config servo range finder
 GPIO.setmode(GPIO.BCM)
@@ -114,12 +114,12 @@ def retraer():
 #Contenedores de la aspiradora
 def contenedor1():
     print("Sensor hacia la izquierda")
-    servoDriver2.ChangeDutyCycle(calcular_duty_cycle(angleS2 + 90))
+    servoDriver2.ChangeDutyCycle(calcular_duty_cycle(angleS2 + 180))
 
 
 def contenedor2():
     print("Sensor hacia la derecha")
-    servoDriver2.ChangeDutyCycle(calcular_duty_cycle(angleS2 - 90))
+    servoDriver2.ChangeDutyCycle(calcular_duty_cycle(angleS2 - 180))
 
 
 class MyController(Controller):
