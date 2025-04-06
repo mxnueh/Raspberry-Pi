@@ -4,7 +4,7 @@ import time
 from datetime import datetime
 
 ENA1 = 18  # Pin PWM para Motor A
-IN1 = 17  # Direccn Motor A
+IN1 = 5  # Direccn Motor A
 IN2 = 7
 
 ENB1 = 19  # Pin P      WM para Motor B
