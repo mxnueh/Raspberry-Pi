@@ -13,6 +13,7 @@ def getLidarData(addr, cmd):
     distance = data[0] | (data[1] << 8)
     strengh = data[2] | (data[3] << 8)
     temperature = (data[4] | (data[5] << 8)) / 100 
-    return int(distance)
+    return int(distance) / 2.54
+    
 
 
